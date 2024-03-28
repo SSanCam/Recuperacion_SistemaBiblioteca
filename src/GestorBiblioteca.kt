@@ -2,6 +2,7 @@ class GestorBiblioteca() {
 
     val catalogoLibros: MutableList<Libro> = mutableListOf()
     val registroPrestamos: MutableList<Libro> = mutableListOf()
+
     /**
      * Agregar libro:
      * @param libro Libro Es es libro que va a agregarse al catálogo.
@@ -21,13 +22,13 @@ class GestorBiblioteca() {
 
     /**
      * Registar préstamo:
-     * Cambia el estado del libro a prestado si está disponible.
+     * Cambia el estado del libro a prestado, si está disponible y lo agrega al registro de libros prestados.
      */
     fun resgistrarPrestamo(libro: Libro) {
-        if (libro.estado == EstadoLibro.DISPONIBLE){
+        if (libro.estado == EstadoLibro.DISPONIBLE) {
             libro.estado = EstadoLibro.PERSTADO
             registroPrestamos.add(libro)
-        }else{
+        } else {
             "El libro ${libro.titulo} no está disponible para préstamo."
         }
     }
@@ -49,4 +50,15 @@ class GestorBiblioteca() {
     fun consultarDisponibilidad(libro: Libro): EstadoLibro {
         return libro.estado
     }
+
+    /**
+     * Retornar libros: en función de su estado: disponibles, prestados y todos.
+     * @param catalogo List<Libro> Recibe el catalogo de libros
+     */
+    fun retornarLibros(catalogo: List<Libro>): Triple<List<Libro>, List<Libro>, List<Libro>> {
+        val librosDisponibles = catalogo.filter { it.estado == EstadoLibro.DISPONIBLE }
+        val librosPrestados = catalogo.filter { it.estado == EstadoLibro.PERSTADO }
+        return Triple(librosDisponibles, librosPrestados, catalogo)
+    }
+
 }

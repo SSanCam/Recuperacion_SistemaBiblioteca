@@ -1,7 +1,9 @@
 import java.time.Year
+import java.util.*
+
 /**
  * Clase que representa un libro en la biblioteca.
- * @property id El ID único del libro.
+ * @property UUID El ID único del libro.
  * @property titulo El título del libro.
  * @property autor El autor del libro.
  * @property publicacion El año de publicación del libro.
@@ -11,7 +13,7 @@ import java.time.Year
  * @throws IllegalArgumentException Si el año de publicación es superior al año actual.
  */
 class Libro(
-    val id: Int,
+    val id: UUID,
     val titulo: String,
     val autor: String,
     val publicacion: Int,
@@ -23,6 +25,10 @@ class Libro(
         require(autor.isNotBlank()) { "Éste campo no puede estar vacío." }
         require(titulo.isNotBlank()) { "Éste campo no puede estar vacío." }
         require(publicacion <= Year.now().value) { "El año de publicación, de un libro ya en el mercado, no puede ser superior al actual." }
+    }
+
+    override fun toString(): String {
+        return "\nLibro ID: $id - Título: \'${ titulo }\' - Autor: \'$autor\' - Año de publicación: $publicacion - Temática: $tematica - Estado: $estado"
     }
 
 }
