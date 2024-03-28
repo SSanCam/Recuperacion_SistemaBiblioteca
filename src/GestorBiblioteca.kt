@@ -29,7 +29,7 @@ class GestorBiblioteca() {
             libro.estado = EstadoLibro.PERSTADO
             registroPrestamos.add(libro)
         } else {
-            "El libro ${libro.titulo} no está disponible para préstamo."
+            println("El libro ${libro.titulo} no está disponible para préstamo.")
         }
     }
 
@@ -39,8 +39,12 @@ class GestorBiblioteca() {
      */
 
     fun devolverLibro(libro: Libro) {
-        libro.estado = EstadoLibro.DISPONIBLE
-        registroPrestamos.remove(libro)
+        if (libro.estado == EstadoLibro.PERSTADO) {
+            println("El libro \'${libro.titulo}\'no está prestado. No necesita devolución.")
+        } else {
+            libro.estado = EstadoLibro.DISPONIBLE
+            registroPrestamos.remove(libro)
+        }
     }
 
     /**
