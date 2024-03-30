@@ -28,7 +28,7 @@ class GestorBiblioteca() {
      */
     fun resgistrarPrestamo(libro: Libro) {
         if (libro.estado == EstadoLibro.DISPONIBLE) {
-            libro.estado = EstadoLibro.PERSTADO
+            libro.estado = EstadoLibro.PRESTADO
             registroPrestamos.add(libro)
         } else {
             println("El libro ${libro.titulo} no está disponible para préstamo.")
@@ -41,7 +41,7 @@ class GestorBiblioteca() {
      */
 
     fun devolverLibro(libro: Libro) {
-        if (libro.estado == EstadoLibro.PERSTADO) {
+        if (libro.estado == EstadoLibro.PRESTADO) {
             println("El libro \'${libro.titulo}\'no está prestado. No necesita devolución.")
         } else {
             libro.estado = EstadoLibro.DISPONIBLE
@@ -63,7 +63,7 @@ class GestorBiblioteca() {
      */
     fun retornarLibros(catalogo: List<Libro>): Triple<List<Libro>, List<Libro>, List<Libro>> {
         val librosDisponibles = catalogo.filter { it.estado == EstadoLibro.DISPONIBLE }
-        val librosPrestados = catalogo.filter { it.estado == EstadoLibro.PERSTADO }
+        val librosPrestados = catalogo.filter { it.estado == EstadoLibro.PRESTADO }
         return Triple(librosDisponibles, librosPrestados, catalogo)
     }
 

@@ -99,7 +99,7 @@ class MenuUsuario(private val gestor: GestorBiblioteca) {
         }
         if (titulo in libros) {
             val tituloPrestado = gestor.catalogoLibros.find { it.titulo == titulo }
-            tituloPrestado?.estado = EstadoLibro.PERSTADO
+            tituloPrestado?.estado = EstadoLibro.PRESTADO
             println("El préstamo se ha realizado correctamente.")
         }
     }
@@ -117,9 +117,10 @@ class MenuUsuario(private val gestor: GestorBiblioteca) {
      * Mostrará los libros según su estado: todos, PRESTADO o DISPONIBLE
      */
     open fun mostrarLibros() {
-        val librosDisponibles = (gestor.catalogoLibros.filter { it.estado == EstadoLibro.DISPONIBLE }).joinToString { "\n" }
-        val librosPrestados = (gestor.catalogoLibros.filter { it.estado == EstadoLibro.PERSTADO }).joinToString { "\n" }
-        val catalogoCompleto = (gestor.catalogoLibros).joinToString { "\n" }
+        val catalogo = gestor.catalogoLibros
+        val librosDisponibles = (catalogo.filter { it.estado == EstadoLibro.DISPONIBLE }).joinToString { "\n" }
+        val librosPrestados = (catalogo.filter { it.estado == EstadoLibro.PRESTADO }).joinToString { "\n" }
+        val catalogoCompleto = catalogo.joinToString { "\n" }
         println("Los títulos de libros disponibles son: $librosDisponibles")
         println("Los títulos de libros prestados son: $librosPrestados")
         println("Los libros del catálogo actual son: $catalogoCompleto")
