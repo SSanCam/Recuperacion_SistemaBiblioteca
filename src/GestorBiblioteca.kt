@@ -1,3 +1,5 @@
+import java.util.*
+
 class GestorBiblioteca() {
     val catalogoLibros: MutableList<Libro> = mutableListOf()
     val registroPrestamos: MutableList<Libro> = mutableListOf()
@@ -14,8 +16,12 @@ class GestorBiblioteca() {
      * @param libro Libro Es es libro que va a agregarse al catálogo.
      */
     fun agregarLibro(libro: Libro) {
+        val nuevaId = UtilidadesBiblioteca.GENERAR_ID_LIBRO()
+        libro.id = UUID.fromString(nuevaId)
         catalogoLibros.add(libro)
-        println("Libro agregado.")
+        IMPRIMIR_TEXTO("Libro agregado correctamente.")
+
+
     }
 
     /**

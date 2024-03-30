@@ -13,7 +13,7 @@ import java.util.*
  * @throws IllegalArgumentException Si el año de publicación es superior al año actual.
  */
 class Libro(
-    val id: UUID,
+    var id: UUID,
     val titulo: String,
     val autor: String,
     val publicacion: Int,
