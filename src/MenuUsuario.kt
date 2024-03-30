@@ -117,7 +117,8 @@ class MenuUsuario(private val gestor: GestorBiblioteca) {
      * Mostrará los libros según su estado: todos, PRESTADO o DISPONIBLE
      */
     open fun mostrarLibros() {
-        val librosDisponibles = (gestor.catalogoLibros.filter { it.estado == EstadoLibro.DISPONIBLE }).joinToString { "\n" }
+        val librosDisponibles =
+            (gestor.catalogoLibros.filter { it.estado == EstadoLibro.DISPONIBLE }).joinToString { "\n" }
         val librosPrestados = (gestor.catalogoLibros.filter { it.estado == EstadoLibro.PERSTADO }).joinToString { "\n" }
         val catalogoCompleto = (gestor.catalogoLibros).joinToString { "\n" }
         println("Los títulos de libros disponibles son: $librosDisponibles")
