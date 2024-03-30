@@ -7,6 +7,7 @@ fun main() {
 
     // Crear instancia del GestorBiblioteca
     val gestor = GestorBiblioteca()
+
     // Crear algunos libros y los agregamos al catálogo:
     val libro1 = Libro(UUID.randomUUID(), "El principito", "Antoine de Saint-Exupéry", 1943, "Fábula")
     val libro2 = Libro(UUID.randomUUID(), "Cien años de soledad", "Gabriel García Márquez", 1967, "Realismo mágico")
@@ -35,6 +36,6 @@ fun main() {
     gestor.devolverLibro(libro4)
 
     // Retornar libros según estado
-    val (librosDisponibles, librosPrestados, todosLibros) = gestor.retornarLibros(gestor.catalogoLibros)
-
+    val todosLibros = gestor.catalogoLibros
+    gestor.retornarLibros(todosLibros)
 }

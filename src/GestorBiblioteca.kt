@@ -2,12 +2,13 @@ class GestorBiblioteca() {
     val catalogoLibros: MutableList<Libro> = mutableListOf()
     val registroPrestamos: MutableList<Libro> = mutableListOf()
 
-    companion object{
-        fun IMPRIMIR_TEXTO(texto: Any){
+    companion object {
+        fun IMPRIMIR_TEXTO(texto: Any) {
             val imprimir = println(texto)
             return imprimir
         }
     }
+
     /**
      * Agregar libro:
      * @param libro Libro Es es libro que va a agregarse al catálogo.
@@ -68,10 +69,16 @@ class GestorBiblioteca() {
      * Retornar libros: en función de su estado: disponibles, prestados y todos.
      * @param catalogo List<Libro> Recibe el catalogo de libros
      */
-    fun retornarLibros(catalogo: List<Libro>): Triple<List<Libro>, List<Libro>, List<Libro>> {
-        val librosDisponibles = catalogo.filter { it.estado == EstadoLibro.DISPONIBLE }
-        val librosPrestados = catalogo.filter { it.estado == EstadoLibro.PRESTADO }
-        return Triple(librosDisponibles, librosPrestados, catalogo)
+    fun retornarLibros(catalogo: List<Libro>) {
+        val librosDisponibles = (catalogo.filter { it.estado == EstadoLibro.DISPONIBLE }).joinToString { "\n" }
+        val librosPrestados = catalogo.filter { it.estado == EstadoLibro.PRESTADO }.joinToString { "\n" }
+        IMPRIMIR_TEXTO(
+            "Nuestro catalogo completo:\n" +
+                    "${catalogo.joinToString { "\n" }}\n" +
+                    "Libros disponibles:\n" +
+                    "$librosDisponibles\n" +
+                    "Libros prestados:\n" +
+                    librosPrestados
+        )
     }
-
 }
