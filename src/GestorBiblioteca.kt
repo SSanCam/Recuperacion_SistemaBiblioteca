@@ -1,3 +1,4 @@
+import java.time.LocalDateTime
 import java.util.*
 
 class GestorBiblioteca() {
@@ -5,6 +6,7 @@ class GestorBiblioteca() {
     val registroPrestamos: MutableList<Libro> = mutableListOf()
 
     companion object {
+        // Función con la que vamos a reemplazar println()
         fun IMPRIMIR_TEXTO(texto: Any) {
             val imprimir = println(texto)
             return imprimir
@@ -12,17 +14,24 @@ class GestorBiblioteca() {
     }
 
     /**
-     * Agregar libro:
-     * @param libro Libro Es es libro que va a agregarse al catálogo.
+     * Agregar libro
+     * @param titulo String Título del libro.
+     * @param autor String Nombre del autor del libro.
+     * @param publicacion Int Año de publicación del libro.
+     * @param tematica String Nombre del género del libro.
+     * @param estado EstadoLibro Indica si el libro se encuentre 'PRESTADO' o 'DISPONIBLE' para préstamo.
      */
     fun agregarLibro(libro: Libro) {
         val nuevaId = UtilidadesBiblioteca.GENERAR_ID_LIBRO()
-        libro.id = UUID.fromString(nuevaId)
+        val fechaRegistro = LocalDateTime.now()
+        libro.id = nuevaId
         catalogoLibros.add(libro)
-        IMPRIMIR_TEXTO("Libro agregado correctamente.")
-
+        return IMPRIMIR_TEXTO(
+            "El libro con ID \'$nuevaId\', se ha agregado con exito en: $fechaRegistro."
+        )
 
     }
+
 
     /**
      * Eliminar libro:
@@ -30,8 +39,12 @@ class GestorBiblioteca() {
      * @param libro Libro Libro a eliminar del catálogo.
      */
     fun eliminarLibro(libro: Libro) {
+        val gestor = GestorBiblioteca()
+        val catalogoLibros = gestor.catalogoLibros
         catalogoLibros.remove(libro)
-        println("Libro eliminado.")
+        IMPRIMIR_TEXTO(
+            "El libro ${libro.titulo} ha sido eliminado correctamente."
+        )
     }
 
     /**
@@ -43,8 +56,7 @@ class GestorBiblioteca() {
             libro.estado = EstadoLibro.PRESTADO
             registroPrestamos.add(libro)
         } else {
-            val text = ("El libro ${libro.titulo} no está disponible para préstamo.")
-            IMPRIMIR_TEXTO(text)
+            IMPRIMIR_TEXTO("El libro ${libro.titulo} no está disponible para préstamo.")
         }
     }
 
@@ -60,6 +72,7 @@ class GestorBiblioteca() {
         } else {
             libro.estado = EstadoLibro.DISPONIBLE
             registroPrestamos.remove(libro)
+            IMPRIMIR_TEXTO("El libro con título \'${libro.titulo}\' ha sido devuelto correctamente.")
         }
     }
 
@@ -88,3 +101,4 @@ class GestorBiblioteca() {
         )
     }
 }
+

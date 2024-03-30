@@ -56,16 +56,16 @@ class MenuUsuario(private val gestor: GestorBiblioteca) {
      */
     open fun agregarLibro() {
         println("Ingresa el título del libro: ")
-        var titulo = readln().toString()
+        var titulo = readln()
         println("Ingresa el nombre del autor: ")
-        var autor = readln().toString()
+        var autor = readln()
         println("Ingresa el año de publicación.")
         var publicacion = readln().toInt()
         println("Indica la temática del libro: ")
-        var tematica = readln().toString()
+        var tematica = readln()
         val libroNuevo =
-            Libro(UUID.randomUUID(), titulo, autor, publicacion, tematica, EstadoLibro.DISPONIBLE)
-        gestor.agregarLibro(libroNuevo)
+            Libro(UtilidadesBiblioteca.GENERAR_ID_LIBRO(), titulo, autor, publicacion, tematica, EstadoLibro.DISPONIBLE)
+        gestor.catalogoLibros.add(libroNuevo)
         println("Libro agregado correctamente.")
     }
 
