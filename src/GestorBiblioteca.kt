@@ -9,6 +9,7 @@ class GestorBiblioteca() {
      */
     fun agregarLibro(libro: Libro) {
         catalogoLibros.add(libro)
+        println("Libro agregado.")
     }
 
     /**
@@ -18,6 +19,7 @@ class GestorBiblioteca() {
      */
     fun eliminarLibro(libro: Libro) {
         catalogoLibros.remove(libro)
+        println("Libro eliminado.")
     }
 
     /**
