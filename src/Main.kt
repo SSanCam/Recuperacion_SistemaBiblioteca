@@ -43,13 +43,4 @@ fun main() {
     println("Todos los libros: $todosLibros")
     */
 
-    val catalogo = gestor.catalogoLibros
-    val prestados = catalogo.filter { it.estado == EstadoLibro.PRESTADO }
-    val disponibles = catalogo.filter { it.estado == EstadoLibro.DISPONIBLE }
-    println("Todos los libros del catalogo: ")
-    consola.imprimir(catalogo)
-    println("Libros prestados: ")
-    consola.imprimir(prestados)
-    println("Libros disponibles:")
-    consola.imprimir(disponibles)
 }

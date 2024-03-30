@@ -5,6 +5,13 @@ import java.util.*
  * Con esta clase el usuario podrá menejar la gestión de la biblioteca de forma sencilla.
  */
 class MenuUsuario(private val gestor: GestorBiblioteca) {
+    companion object {
+        fun IMPRIMIR_TEXTO(texto: Any) {
+            val imprimir = println(texto)
+            return imprimir
+        }
+    }
+
     open fun mostrarMenu() {
         println(
             "Bienvenido al gestor de la biblioteca.\nIndica que operación quieres realizar según su número:\n" +
@@ -100,7 +107,8 @@ class MenuUsuario(private val gestor: GestorBiblioteca) {
         if (titulo in libros) {
             val tituloPrestado = gestor.catalogoLibros.find { it.titulo == titulo }
             tituloPrestado?.estado = EstadoLibro.PRESTADO
-            println("El préstamo se ha realizado correctamente.")
+            val aviso = ("El préstamo se ha realizado correctamente.")
+            IMPRIMIR_TEXTO(aviso)
         }
     }
 
@@ -121,9 +129,11 @@ class MenuUsuario(private val gestor: GestorBiblioteca) {
         val librosDisponibles = (catalogo.filter { it.estado == EstadoLibro.DISPONIBLE }).joinToString { "\n" }
         val librosPrestados = (catalogo.filter { it.estado == EstadoLibro.PRESTADO }).joinToString { "\n" }
         val catalogoCompleto = catalogo.joinToString { "\n" }
-        println("Los títulos de libros disponibles son: $librosDisponibles")
-        println("Los títulos de libros prestados son: $librosPrestados")
-        println("Los libros del catálogo actual son: $catalogoCompleto")
+        val texto = ("Los títulos de libros disponibles son: $librosDisponibles\n" +
+                "Los títulos de libros prestados son: $librosPrestados\n" +
+                "Los títulos de libros prestados son: $librosPrestados\n" +
+                "Los libros del catálogo actual son: $catalogoCompleto")
+        IMPRIMIR_TEXTO(texto)
     }
 
 }

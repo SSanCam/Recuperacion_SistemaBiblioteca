@@ -1,8 +1,13 @@
 class GestorBiblioteca() {
-
     val catalogoLibros: MutableList<Libro> = mutableListOf()
     val registroPrestamos: MutableList<Libro> = mutableListOf()
 
+    companion object{
+        fun IMPRIMIR_TEXTO(texto: Any){
+            val imprimir = println(texto)
+            return imprimir
+        }
+    }
     /**
      * Agregar libro:
      * @param libro Libro Es es libro que va a agregarse al catálogo.
@@ -31,7 +36,8 @@ class GestorBiblioteca() {
             libro.estado = EstadoLibro.PRESTADO
             registroPrestamos.add(libro)
         } else {
-            println("El libro ${libro.titulo} no está disponible para préstamo.")
+            val text = ("El libro ${libro.titulo} no está disponible para préstamo.")
+            IMPRIMIR_TEXTO(text)
         }
     }
 
@@ -42,7 +48,8 @@ class GestorBiblioteca() {
 
     fun devolverLibro(libro: Libro) {
         if (libro.estado == EstadoLibro.PRESTADO) {
-            println("El libro \'${libro.titulo}\'no está prestado. No necesita devolución.")
+            val text = ("El libro \'${libro.titulo}\'no está prestado. No necesita devolución.")
+            IMPRIMIR_TEXTO(text)
         } else {
             libro.estado = EstadoLibro.DISPONIBLE
             registroPrestamos.remove(libro)
