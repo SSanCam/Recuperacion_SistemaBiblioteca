@@ -22,13 +22,38 @@ class Libro(
 ) {
 
     init {
-        require(autor.isNotBlank()) { "Éste campo no puede estar vacío." }
-        require(titulo.isNotBlank()) { "Éste campo no puede estar vacío." }
-        require(publicacion <= Year.now().value) { "El año de publicación, de un libro ya en el mercado, no puede ser superior al actual." }
+        try {
+            require(autor.isNotBlank()) { "Éste campo no puede estar vacío." }
+            require(titulo.isNotBlank()) { "Éste campo no puede estar vacío." }
+            require(publicacion <= Year.now().value) { "El año de publicación, de un libro ya en el mercado, no puede ser superior al actual." }
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+        }
+
+    }
+
+    private fun cambiarEstadoInterno(nuevoEstado: EstadoLibro) {
+        estado = nuevoEstado
+    }
+
+    fun comprobarEstado(libro: Libro): EstadoLibro {
+        return libro.estado
+    }
+
+    fun obtenerAutor(): String {
+        return autor
+    }
+
+    fun obtenerPublicacion(): Int {
+        return publicacion
+    }
+
+    fun obtenerTematica(): String {
+        return tematica
     }
 
     override fun toString(): String {
-        return "\nLibro ID: $id - Título: \'${ titulo }\' - Autor: \'$autor\' - Año de publicación: $publicacion - Temática: $tematica - Estado: $estado"
+        return "\nLibro ID: $id - Título: \'${titulo}\' - Autor: \'$autor\' - Año de publicación: $publicacion - Temática: $tematica - Estado: $estado"
     }
 
 }
