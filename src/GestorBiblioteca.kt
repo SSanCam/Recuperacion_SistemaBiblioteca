@@ -6,7 +6,7 @@ class GestorBiblioteca() {
 
     companion object {
         // Función con la que vamos a reemplazar println()
-        fun imprimirTexto(texto: Any) {
+        fun printText(texto: Any) {
             val imprimir = println(texto)
             return imprimir
         }
@@ -22,7 +22,7 @@ class GestorBiblioteca() {
         val fechaRegistro = LocalDateTime.now()
         libro.id = nuevaId
         catalogoLibros.add(libro)
-        return imprimirTexto(
+        return printText(
             "El libro con ID \'$nuevaId\', se ha agregado con exito en: $fechaRegistro."
         )
 
@@ -38,7 +38,7 @@ class GestorBiblioteca() {
         val gestor = GestorBiblioteca()
         val catalogoLibros = gestor.catalogoLibros
         catalogoLibros.remove(libro)
-        imprimirTexto(
+        printText(
             "El libro ${libro.titulo} ha sido eliminado correctamente."
         )
     }
@@ -52,7 +52,7 @@ class GestorBiblioteca() {
             libro.estado = EstadoLibro.PRESTADO
             registroPrestamos.add(Prestamo(libro,usuario, LocalDateTime.now(), null))
         } else {
-            imprimirTexto("El libro ${libro.titulo} no está disponible para préstamo.")
+            printText("El libro ${libro.titulo} no está disponible para préstamo.")
         }
     }
 
@@ -63,11 +63,11 @@ class GestorBiblioteca() {
 
     fun devolverLibro(libro: Libro) {
         if (libro.estado == EstadoLibro.PRESTADO) {
-            imprimirTexto("El libro \'${libro.titulo}\'no está prestado. No necesita devolución.")
+            printText("El libro \'${libro.titulo}\'no está prestado. No necesita devolución.")
         } else {
             libro.estado = EstadoLibro.DISPONIBLE
             registroPrestamos.removeAll { it.libro == libro }
-            imprimirTexto("El libro con título \'${libro.titulo}\' ha sido devuelto correctamente.")
+            printText("El libro con título \'${libro.titulo}\' ha sido devuelto correctamente.")
         }
     }
 
@@ -86,7 +86,7 @@ class GestorBiblioteca() {
     fun retornarLibros(catalogo: List<Libro>) {
         val librosDisponibles = (catalogo.filter { it.estado == EstadoLibro.DISPONIBLE }).joinToString { "\n" }
         val librosPrestados = catalogo.filter { it.estado == EstadoLibro.PRESTADO }.joinToString { "\n" }
-        imprimirTexto(
+        printText(
             "Nuestro catalogo completo:\n" +
                     "${catalogo.joinToString { "\n" }}\n" +
                     "Libros disponibles:\n" +

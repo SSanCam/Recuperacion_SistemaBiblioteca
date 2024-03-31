@@ -18,4 +18,8 @@ class Usuario(id: Int, nombre: String, val librosPrestados: MutableList<Libro> =
     fun librosPrestados(): List<Libro> {
         return librosPrestados.toList()
     }
+
+    override fun toString(): String {
+        return "Usuario ID: $id - Nombre: $nombre - Libros Prestados: $librosPrestados"
+    }
 }

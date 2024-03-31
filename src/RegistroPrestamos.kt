@@ -23,8 +23,10 @@ class RegistroPrestamos(
     }
 
     fun consultarHistorialUsuario(usuario: Usuario): List<Prestamo> {
-        return historialPrestamos.filter { it.usuario == usuario }
+        val listaLibros = (historialPrestamos.filter { it.usuario == usuario }).toList()
+        return listaLibros
     }
+
 
 }
 

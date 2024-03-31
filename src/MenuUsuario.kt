@@ -3,6 +3,8 @@
  * Con esta clase el usuario podrá menejar la gestión de la biblioteca de forma sencilla.
  */
 open class MenuUsuario(private val gestor: GestorBiblioteca) {
+    private val registro = RegistroPrestamos()
+
     companion object {
         fun imprimirTexto(texto: Any) {
             val imprimir = println(texto)
@@ -17,8 +19,10 @@ open class MenuUsuario(private val gestor: GestorBiblioteca) {
                     "2.- Eliminar un libro.\n" +
                     "3.- Realizar un préstamo.\n" +
                     "4.- Devolver un libro.\n" +
-                    "5.- Consultar el estado de los libros.\n" +
-                    "6.- Salir del gestor de biblioteca."
+                    "5-. Consultar el histórico de préstamos.\n" +
+                    "6.- Consultar el histórico de préstamos de un usuario.\n" +
+                    "7.- Consultar el estado de los libros.\n" +
+                    "8.- Salir del gestor de biblioteca."
         )
         val opcion = readln().toInt()
         var seguir = true
@@ -34,10 +38,12 @@ open class MenuUsuario(private val gestor: GestorBiblioteca) {
                 3 -> registrarPrestamo()
                 // Resgistrar devolución por título del libro
                 4 -> registrarDevolucion()
+                // Consultar historial de préstamos
+                5 -> consultarHistoricoPrestamos()
                 // Mostrar los libros según su estado
-                5 -> mostrarLibros()
+                6 -> mostrarLibros()
                 // Salir del programa
-                6 -> {
+                7 -> {
                     println("Saliendo del programa")
                     seguir = false
                 }
@@ -132,6 +138,11 @@ open class MenuUsuario(private val gestor: GestorBiblioteca) {
                 "Los títulos de libros prestados son: $librosPrestados\n" +
                 "Los libros del catálogo actual son: $catalogoCompleto")
         imprimirTexto(texto)
+    }
+
+    open fun consultarHistoricoPrestamos(): List<Prestamo> {
+        val historicoPrestamos = registro.historialPrestamos.toList()
+        return historicoPrestamos
     }
 
 }
