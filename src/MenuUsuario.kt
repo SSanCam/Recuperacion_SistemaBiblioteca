@@ -68,7 +68,7 @@ open class MenuUsuario(private val gestor: GestorBiblioteca) {
         println("Indica la temática del libro: ")
         val tematica = readln()
         val libroNuevo =
-            Libro(UtilidadesBiblioteca.GENERAR_ID_LIBRO(), titulo, autor, publicacion, tematica, EstadoLibro.DISPONIBLE)
+            Libro(UtilidadesBiblioteca.GENERAR_ID_LIBRO(), titulo, autor, publicacion, tematica, EstadoElemento.DISPONIBLE)
         gestor.catalogoLibros.add(libroNuevo)
         println("Libro agregado correctamente.")
     }
@@ -110,7 +110,7 @@ open class MenuUsuario(private val gestor: GestorBiblioteca) {
         }
         if (titulo in libros) {
             val tituloPrestado = gestor.catalogoLibros.find { it.titulo == titulo }
-            tituloPrestado?.estado = EstadoLibro.PRESTADO
+            tituloPrestado?.estado = EstadoElemento.PRESTADO
             val aviso = ("El préstamo se ha realizado correctamente.")
             imprimirTexto(aviso)
         }
@@ -130,8 +130,8 @@ open class MenuUsuario(private val gestor: GestorBiblioteca) {
      */
     open fun mostrarLibros() {
         val catalogo = gestor.catalogoLibros
-        val librosDisponibles = (catalogo.filter { it.estado == EstadoLibro.DISPONIBLE }).joinToString { "\n" }
-        val librosPrestados = (catalogo.filter { it.estado == EstadoLibro.PRESTADO }).joinToString { "\n" }
+        val librosDisponibles = (catalogo.filter { it.estado == EstadoElemento.DISPONIBLE }).joinToString { "\n" }
+        val librosPrestados = (catalogo.filter { it.estado == EstadoElemento.PRESTADO }).joinToString { "\n" }
         val catalogoCompleto = catalogo.joinToString { "\n" }
         val texto = ("Los títulos de libros disponibles son: $librosDisponibles\n" +
                 "Los títulos de libros prestados son: $librosPrestados\n" +

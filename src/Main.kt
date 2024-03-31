@@ -10,7 +10,9 @@ fun main() {
         return imprimir.toString()
     }
     // Crear instancia del GestorBiblioteca
-    val gestor = GestorBiblioteca()
+    val registroPrestamos = RegistroPrestamos()
+    val gestor = GestorBiblioteca(registroPrestamos)
+    // Crear instancia del RegistroPrestamos
     val prestamo = RegistroPrestamos()
     // Crear algunos libros y los agregamos al catálogo:
     val libro1 = Libro(UUID.randomUUID().toString(), "El principito", "Antoine de Saint-Exupéry", 1943, "Fábula")

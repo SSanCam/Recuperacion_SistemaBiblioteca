@@ -3,19 +3,23 @@ import java.time.LocalDateTime
 class RegistroPrestamos(
     var prestamosActuales: MutableMap<Libro, Usuario> = mutableMapOf(),
     val historialPrestamos: MutableList<Prestamo> = mutableListOf()
-) {
+): GestorPrestamos {
 
-    fun registrarPrestamo(libro: Libro, usuario: Usuario) {
+    override fun registrarPrestamo(libro: Libro, usuario: Usuario) {
         prestamosActuales[libro] = usuario
         historialPrestamos.add(Prestamo(libro, usuario, LocalDateTime.now(), null))
     }
 
-    fun devolverLibro(libro: Libro) {
+    override fun devolverLibro(libro: Libro) {
         val prestamo = historialPrestamos.findLast { it.libro == libro && it.fechaDevolucion == null }
         if (prestamo != null) {
             prestamo.fechaDevolucion = LocalDateTime.now()
         }
         prestamosActuales.remove(libro)
+    }
+
+    override fun consultarHistorial(usuario: Usuario): List<Prestamo> {
+        return historialPrestamos.filter { it.usuario == usuario }
     }
 
     fun consultarHistorialLibro(libro: Libro): List<Prestamo> {

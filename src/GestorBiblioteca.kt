@@ -1,6 +1,6 @@
 import java.time.LocalDateTime
 
-class GestorBiblioteca() {
+class GestorBiblioteca(private val gestorPrestamos: GestorPrestamos) {
     val catalogoLibros: MutableList<Libro> = mutableListOf()
     private val registroPrestamos: MutableList<Prestamo> = mutableListOf()
 
@@ -27,21 +27,21 @@ class GestorBiblioteca() {
         )
 
     }
-
-
     /**
      * Eliminar libro:
      * Método que elimina un libro determinado del catálogo
      * @param libro Libro Libro a eliminar del catálogo.
      */
     fun eliminarLibro(libro: Libro) {
-        val gestor = GestorBiblioteca()
+        val gestor = GestorBiblioteca(gestorPrestamos)
         val catalogoLibros = gestor.catalogoLibros
         catalogoLibros.remove(libro)
         printText(
             "El libro ${libro.titulo} ha sido eliminado correctamente."
         )
     }
+
+
 
     /**
      * Registar préstamo:
