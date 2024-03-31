@@ -13,13 +13,13 @@ import java.util.*
  * @throws IllegalArgumentException Si el año de publicación es superior al año actual.
  */
 class Libro(
-    var id: String,
-    val titulo: String,
+    override var id: String,
+    override var titulo: String,
     private val autor: String,
     private val publicacion: Int,
     private val tematica: String,
-    var estado: EstadoLibro = EstadoLibro.DISPONIBLE
-) {
+    override var estado: EstadoLibro = EstadoLibro.DISPONIBLE
+): ElementoBiblioteca(id, titulo, estado)  {
 
     init {
         try {
