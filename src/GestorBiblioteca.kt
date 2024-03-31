@@ -48,8 +48,8 @@ class GestorBiblioteca() {
      * Cambia el estado del libro a prestado, si está disponible y lo agrega al registro de libros prestados.
      */
     fun registrarPrestamo(libro: Libro, usuario: Usuario) {
-        if (libro.estado == EstadoLibro.DISPONIBLE) {
-            libro.estado = EstadoLibro.PRESTADO
+        if (libro.estado == EstadoElemento.DISPONIBLE) {
+            libro.estado = EstadoElemento.PRESTADO
             registroPrestamos.add(Prestamo(libro,usuario, LocalDateTime.now(), null))
         } else {
             printText("El libro ${libro.titulo} no está disponible para préstamo.")
@@ -62,10 +62,10 @@ class GestorBiblioteca() {
      */
 
     fun devolverLibro(libro: Libro) {
-        if (libro.estado == EstadoLibro.PRESTADO) {
+        if (libro.estado == EstadoElemento.PRESTADO) {
             printText("El libro \'${libro.titulo}\'no está prestado. No necesita devolución.")
         } else {
-            libro.estado = EstadoLibro.DISPONIBLE
+            libro.estado = EstadoElemento.DISPONIBLE
             registroPrestamos.removeAll { it.libro == libro }
             printText("El libro con título \'${libro.titulo}\' ha sido devuelto correctamente.")
         }
@@ -75,7 +75,7 @@ class GestorBiblioteca() {
      * Consultar disponibilidad
      * @param libro Libro Indica si el libro en cuestión está, o no, disponible para préstamo.
      */
-    fun consultarDisponibilidad(libro: Libro): EstadoLibro {
+    fun consultarDisponibilidad(libro: Libro): EstadoElemento {
         return libro.estado
     }
 
@@ -84,8 +84,8 @@ class GestorBiblioteca() {
      * @param catalogo List<Libro> Recibe el catalogo de libros
      */
     fun retornarLibros(catalogo: List<Libro>) {
-        val librosDisponibles = (catalogo.filter { it.estado == EstadoLibro.DISPONIBLE }).joinToString { "\n" }
-        val librosPrestados = catalogo.filter { it.estado == EstadoLibro.PRESTADO }.joinToString { "\n" }
+        val librosDisponibles = (catalogo.filter { it.estado == EstadoElemento.DISPONIBLE }).joinToString { "\n" }
+        val librosPrestados = catalogo.filter { it.estado == EstadoElemento.PRESTADO }.joinToString { "\n" }
         printText(
             "Nuestro catalogo completo:\n" +
                     "${catalogo.joinToString { "\n" }}\n" +
