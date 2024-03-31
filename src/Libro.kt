@@ -18,8 +18,14 @@ class Libro(
     private val autor: String,
     private val publicacion: Int,
     private val tematica: String,
-    override var estado: EstadoLibro = EstadoLibro.DISPONIBLE
-): ElementoBiblioteca(id, titulo, estado)  {
+    override var estado: EstadoElemento = EstadoElemento.DISPONIBLE
+) : ElementoBiblioteca(id, titulo, estado), Prestable {
+    companion object {
+        fun printText(text: Any) {
+            val imprimir = println(text)
+            return imprimir
+        }
+    }
 
     init {
         try {
@@ -32,11 +38,11 @@ class Libro(
 
     }
 
-    private fun cambiarEstadoInterno(nuevoEstado: EstadoLibro) {
+    private fun cambiarEstadoInterno(nuevoEstado: EstadoElemento) {
         estado = nuevoEstado
     }
 
-    fun comprobarEstado(libro: Libro): EstadoLibro {
+    fun comprobarEstado(libro: Libro): EstadoElemento {
         return libro.estado
     }
 
@@ -50,6 +56,16 @@ class Libro(
 
     fun obtenerTematica(): String {
         return tematica
+    }
+
+    override fun prestar() {
+        estado = EstadoElemento.PRESTADO
+        printText("El libro \'$titulo\' ha sido prestado correcto.")
+    }
+
+    override fun devolver() {
+        estado = EstadoElemento.DISPONIBLE
+        printText("El libro \'$titulo\' ha sido devuelto correctamente.")
     }
 
     override fun toString(): String {
