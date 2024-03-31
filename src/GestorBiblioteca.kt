@@ -1,6 +1,6 @@
 import java.time.LocalDateTime
 
-class GestorBiblioteca(private val gestorPrestamos: GestorPrestamos) {
+class GestorBiblioteca(private val catalogo: Catalogo<ElementoBiblioteca>) {
     val catalogoLibros: MutableList<Libro> = mutableListOf()
     private val registroPrestamos: MutableList<Prestamo> = mutableListOf()
 
@@ -40,8 +40,6 @@ class GestorBiblioteca(private val gestorPrestamos: GestorPrestamos) {
             "El libro ${libro.titulo} ha sido eliminado correctamente."
         )
     }
-
-
 
     /**
      * Registar préstamo:
