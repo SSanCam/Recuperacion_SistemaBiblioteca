@@ -15,9 +15,9 @@ import java.util.*
 class Libro(
     var id: String,
     val titulo: String,
-    val autor: String,
-    val publicacion: Int,
-    val tematica: String,
+    private val autor: String,
+    private val publicacion: Int,
+    private val tematica: String,
     var estado: EstadoLibro = EstadoLibro.DISPONIBLE
 ) {
 

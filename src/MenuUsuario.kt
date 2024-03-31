@@ -1,12 +1,10 @@
-import java.util.*
-
 /**
  * Menu Usuario
  * Con esta clase el usuario podrá menejar la gestión de la biblioteca de forma sencilla.
  */
-class MenuUsuario(private val gestor: GestorBiblioteca) {
+open class MenuUsuario(private val gestor: GestorBiblioteca) {
     companion object {
-        fun IMPRIMIR_TEXTO(texto: Any) {
+        fun imprimirTexto(texto: Any) {
             val imprimir = println(texto)
             return imprimir
         }
@@ -44,7 +42,7 @@ class MenuUsuario(private val gestor: GestorBiblioteca) {
                     seguir = false
                 }
 
-                else -> "Opción inválida. Por favor elija un número disponible en el menu de gestión."
+                else -> imprimirTexto("Opción inválida. Por favor elija un número disponible en el menu de gestión.")
             }
         }
 
@@ -56,13 +54,13 @@ class MenuUsuario(private val gestor: GestorBiblioteca) {
      */
     open fun agregarLibro() {
         println("Ingresa el título del libro: ")
-        var titulo = readln()
+        val titulo = readln()
         println("Ingresa el nombre del autor: ")
-        var autor = readln()
+        val autor = readln()
         println("Ingresa el año de publicación.")
-        var publicacion = readln().toInt()
+        val publicacion = readln().toInt()
         println("Indica la temática del libro: ")
-        var tematica = readln()
+        val tematica = readln()
         val libroNuevo =
             Libro(UtilidadesBiblioteca.GENERAR_ID_LIBRO(), titulo, autor, publicacion, tematica, EstadoLibro.DISPONIBLE)
         gestor.catalogoLibros.add(libroNuevo)
@@ -95,7 +93,7 @@ class MenuUsuario(private val gestor: GestorBiblioteca) {
      * Registrar préstamo
      * Se cambiará el éstado del libro de 'DISPONIBLE'a 'PRESTADO'.
      */
-    open fun registrarPrestamo() {
+    private fun registrarPrestamo() {
         println("Introduce el título del libro que quieres tomar prestado: ")
         var titulo = readln()
         val libros = gestor.catalogoLibros.map { it.titulo }
@@ -108,7 +106,7 @@ class MenuUsuario(private val gestor: GestorBiblioteca) {
             val tituloPrestado = gestor.catalogoLibros.find { it.titulo == titulo }
             tituloPrestado?.estado = EstadoLibro.PRESTADO
             val aviso = ("El préstamo se ha realizado correctamente.")
-            IMPRIMIR_TEXTO(aviso)
+            imprimirTexto(aviso)
         }
     }
 
@@ -133,7 +131,7 @@ class MenuUsuario(private val gestor: GestorBiblioteca) {
                 "Los títulos de libros prestados son: $librosPrestados\n" +
                 "Los títulos de libros prestados son: $librosPrestados\n" +
                 "Los libros del catálogo actual son: $catalogoCompleto")
-        IMPRIMIR_TEXTO(texto)
+        imprimirTexto(texto)
     }
 
 }
