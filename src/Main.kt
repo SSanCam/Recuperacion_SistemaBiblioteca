@@ -21,21 +21,28 @@ fun main() {
     gestor.agregarLibro(libro3)
     gestor.agregarLibro(libro4)
     gestor.agregarLibro(libro5)
+    // Creamos varios usuarios
+    val usuario1 = Usuario(1, "Hermenegildo")
+    val usuario2 = Usuario(2,"Encarnita de Graná")
 
     // Registramos préstamos
-    gestor.resgistrarPrestamo(libro1)
-    gestor.resgistrarPrestamo(libro3)
-    gestor.resgistrarPrestamo(libro5)
+    gestor.registrarPrestamo(libro1, usuario1)
+    gestor.registrarPrestamo(libro3, usuario1)
+    gestor.registrarPrestamo(libro5, usuario2)
+    gestor.registrarPrestamo(libro4, usuario2)
 
     // Devolver un libro
     gestor.devolverLibro(libro1)
 
     // Préstamo erróneo
-    gestor.resgistrarPrestamo(libro3)
+    gestor.registrarPrestamo(libro3, usuario2)
     // Devolución errónea
     gestor.devolverLibro(libro4)
 
     // Retornar libros según estado
-    val todosLibros = gestor.catalogoLibros
-    gestor.retornarLibros(todosLibros)
+    val todosLosLibros = gestor.catalogoLibros
+    gestor.retornarLibros(todosLosLibros)
+
+    // Registro de préstamos y devoluciones.
+    // TODO imprimir los resgistros
 }

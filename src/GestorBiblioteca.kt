@@ -2,7 +2,7 @@ import java.time.LocalDateTime
 
 class GestorBiblioteca() {
     val catalogoLibros: MutableList<Libro> = mutableListOf()
-    private val registroPrestamos: MutableList<Libro> = mutableListOf()
+    private val registroPrestamos: MutableList<Prestamo> = mutableListOf()
 
     companion object {
         // Función con la que vamos a reemplazar println()
@@ -47,10 +47,10 @@ class GestorBiblioteca() {
      * Registar préstamo:
      * Cambia el estado del libro a prestado, si está disponible y lo agrega al registro de libros prestados.
      */
-    fun resgistrarPrestamo(libro: Libro) {
+    fun registrarPrestamo(libro: Libro, usuario: Usuario) {
         if (libro.estado == EstadoLibro.DISPONIBLE) {
             libro.estado = EstadoLibro.PRESTADO
-            registroPrestamos.add(libro)
+            registroPrestamos.add(Prestamo(libro,usuario, LocalDateTime.now(), null))
         } else {
             imprimirTexto("El libro ${libro.titulo} no está disponible para préstamo.")
         }
@@ -63,11 +63,10 @@ class GestorBiblioteca() {
 
     fun devolverLibro(libro: Libro) {
         if (libro.estado == EstadoLibro.PRESTADO) {
-            val text = ("El libro \'${libro.titulo}\'no está prestado. No necesita devolución.")
-            imprimirTexto(text)
+            imprimirTexto("El libro \'${libro.titulo}\'no está prestado. No necesita devolución.")
         } else {
             libro.estado = EstadoLibro.DISPONIBLE
-            registroPrestamos.remove(libro)
+            registroPrestamos.removeAll { it.libro == libro }
             imprimirTexto("El libro con título \'${libro.titulo}\' ha sido devuelto correctamente.")
         }
     }

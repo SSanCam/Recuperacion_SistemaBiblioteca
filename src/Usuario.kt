@@ -1,4 +1,4 @@
-class Usuario(id: Int, nombre: String, librosPrestados: MutableList<Libro>) {
+class Usuario(id: Int, nombre: String, val librosPrestados: MutableList<Libro> = mutableListOf()) {
 
     var id: Int = id
         set(value) {
@@ -10,7 +10,6 @@ class Usuario(id: Int, nombre: String, librosPrestados: MutableList<Libro>) {
             require(nombre.isNotBlank()) { "Éste campo no puede quedar vacío." }
             field = value
         }
-    val librosPrestados: MutableList<Libro> = librosPrestados
 
     fun agregarLibroPrestado(libro: Libro) {
         librosPrestados.add(libro)
